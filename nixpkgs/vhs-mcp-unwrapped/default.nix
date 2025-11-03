@@ -7,7 +7,7 @@ buildGoLatestModule {
 
   meta = with lib; {
     mainProgram = "vhs-mcp";
-    description = "MCP Server for VHS recordings";
+    description = "MCP Server for terminal recordings";
     homepage = "https://github.com/Warashi/vhs-mcp";
     license = licenses.mit;
     platforms = platforms.unix;
