@@ -83,7 +83,11 @@ func runVHS(tapeText string, timeout time.Duration) ([]string, error) {
 	return uris, err
 }
 
-func toolRunTape(ctx context.Context, req *mcp.CallToolRequest, in RunTapeInput) (*mcp.CallToolResult, ArtifactList, error) {
+func toolRunTape(
+	ctx context.Context,
+	req *mcp.CallToolRequest,
+	in RunTapeInput,
+) (*mcp.CallToolResult, ArtifactList, error) {
 	if (in.TapeText == nil && in.TapePath == nil) || (in.TapeText != nil && in.TapePath != nil) {
 		return nil, ArtifactList{}, errors.New("provide exactly one of tape_text or tape_path")
 	}
@@ -114,7 +118,11 @@ func toolRunTape(ctx context.Context, req *mcp.CallToolRequest, in RunTapeInput)
 	}, ArtifactList{Artifacts: uris}, nil
 }
 
-func toolTuiSnap(ctx context.Context, req *mcp.CallToolRequest, in TuiSnapInput) (*mcp.CallToolResult, ArtifactList, error) {
+func toolTuiSnap(
+	ctx context.Context,
+	req *mcp.CallToolRequest,
+	in TuiSnapInput,
+) (*mcp.CallToolResult, ArtifactList, error) {
 	if in.Command == "" || in.WaitRegex == "" {
 		return nil, ArtifactList{}, errors.New("command and wait_regex are required")
 	}
@@ -141,7 +149,17 @@ func toolTuiSnap(ctx context.Context, req *mcp.CallToolRequest, in TuiSnapInput)
 	// 追加キー
 	for _, k := range in.Keys {
 		switch k {
-		case "Up", "Down", "Left", "Right", "Enter", "Tab", "Space", "Backspace", "PageUp", "PageDown", "Escape":
+		case "Up",
+			"Down",
+			"Left",
+			"Right",
+			"Enter",
+			"Tab",
+			"Space",
+			"Backspace",
+			"PageUp",
+			"PageDown",
+			"Escape":
 			b.WriteString(k + "\n")
 		default:
 			// 文字列としてタイプ
