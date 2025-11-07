@@ -51,7 +51,7 @@ func runVHS(tapeText string, timeout time.Duration) ([]string, error) {
 	cmd.Env = os.Environ()
 
 	// 標準出力/標準エラーをログへ（必要なら外してOK）
-	cmd.Stdout = os.Stdout
+	cmd.Stdout = os.Stderr
 	cmd.Stderr = os.Stderr
 
 	done := make(chan error, 1)
