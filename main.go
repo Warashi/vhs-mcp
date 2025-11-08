@@ -36,8 +36,12 @@ type ArtifactList struct {
 }
 
 func runVHS(tapeText string, timeout time.Duration) ([]string, error) {
-	cacheDir, err := os.UserCacheDir()
+	userCacheDir, err := os.UserCacheDir()
 	if err != nil {
+		return nil, err
+	}
+	cacheDir := filepath.Join(userCacheDir, "vhs-mcp")
+	if err := os.MkdirAll(cacheDir, 0o755); err != nil {
 		return nil, err
 	}
 	wd, err := os.MkdirTemp(cacheDir, "vhs-mcp-*")
